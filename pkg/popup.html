@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Rulers and boxes</title>
+    <style>
+      body { overflow: hidden; margin: 0px; background: white; }
+
+      div[data-cmd] {
+        width: 200px;
+        height: 60px;
+        margin: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #eee;
+        cursor: pointer;
+      }
+
+    </style>
+    <script src="popup.js"></script>
+  </head>
+  <body>
+    <div class="commands">
+      <div data-cmd="create-ruler" data-axis="y">Create Horizontal Ruler</div>
+      <div data-cmd="create-ruler" data-axis="x">Create Vertical Ruler</div>
+      <div data-cmd="create-box">Create Box</div>
+    </div>
+  </body>
+</html>
