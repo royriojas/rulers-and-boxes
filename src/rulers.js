@@ -1,3 +1,5 @@
+import { loadStyles } from "./styles";
+
 export const initRulers = () => {
   if (window.__rulers) {
     console.log('rulers already loaded');
@@ -7,14 +9,15 @@ export const initRulers = () => {
   const $ = window.jQuery;
   
   let $currentTarget = null;
+  let firstElementAdded = false;
       
   $('body').on('mousedown', (e) => {
-    $currentTarget?.removeClass('rulers-box-selected');
-        
-    const $box = $(e.target).closest('[data-c="box"]') 
-    const $ruler = $(e.target).closest('[data-c="ruler"]');
-    const $target = $box?.length ? $box : $ruler;
+    if ($(e.target).closest('[data-cmd]').length > 0) return;
     
+    $currentTarget?.removeClass('rulers-box-selected');
+    
+    const $target = $(e.target).closest('[data-c="box"], [data-c="ruler"]');
+            
     if ($target?.length === 0) {
       $currentTarget = null;
       return;
@@ -22,9 +25,11 @@ export const initRulers = () => {
     
     $currentTarget = $target;
     $target.addClass('rulers-box-selected');
+    $target.appendTo('.rulers-container'); // move it to the end to make it to the top
   });
   
   $('body').on('keydown', (e) => {
+    if ($(e.target).closest('[data-size], [data-cmd]').length > 0) return;
     if (!$currentTarget || $currentTarget.length === 0) return;
     if (e.key === 'Escape') {
       $currentTarget?.removeClass('rulers-box-selected');
@@ -65,73 +70,72 @@ export const initRulers = () => {
     }
   });
   
+  $('body').on('click', '[data-cmd="remove"]', (e) => {
+    $(e.target).closest('[data-c="box"], [data-c="ruler"]').remove();
+    $currentTarget = null;
+  });
+  
   const createBox = () => {
+    if (!firstElementAdded) {
+      firstElementAdded = true;
+      loadStyles();
+    }
+    
     const w = 100;
     const h = 100;
-  
-    const $box = $(`<div data-c="box" tab-index="1" class="rulers-box"><span data-size>${w}, ${h}</span></div>`).appendTo('body');
+
+    const $box = $(`<div data-c="box" tab-index="1" class="rulers-box">
+                      <div contenteditable="true" data-size>${w}, ${h}</div>
+                      <a data-cmd="remove" class="rulers-box-ruler-close">
+                        <span>x</span>
+                      </a>
+                    </div>`).appendTo('.rulers-container');
     $box.css({ width: w, height: h });
-    $box.draggable().resizable({
+    $box.draggable({
+      cancel: '[data-size]',
+    }).resizable({
       resize(event, ui) {
-        $box.find('[data-size]').text(`${ui.size.width}, ${ui.size.height}`);
+        const w = ui.size.width;
+        const h = ui.size.height;
+        $box.find('[data-size]').text(`${w}, ${h}`);
+        $box.attr('data-dimensions', `${w}, ${h}`); 
       }
+    });
+    
+    $box.find('[data-size]').on('input', (e) => {
+      let [w, h] = $box.find('[data-size]').text().split(',').map(v => parseInt(v, 10));
+      
+      if (w === undefined || Number.isNaN(w)) {
+        w = 100;
+      }
+      if (h === undefined || Number.isNaN(h)) {
+        h = 100;
+      }
+      
+      $box.css({ width: w, height: h });
+      $box.attr('data-dimensions', `${w}, ${h}`); 
     });
   };
   
+  
   const createRuler = (axis) => {
-    axis = axis || 'y';
-  
-    const dimensions = axis === 'y' ? 'width:100vw; height: 40px;' : 'height: 100vh;width: 40px;';
-  
-    const closeStyle = 'color:#fff;position:absolute;right:10px;top:5px;font-size:12px;text-decoration:none;';
-    const $ruler = $(`<div data-c="ruler" style="${dimensions}" class="rulers-box-ruler" data-axis="${axis}">
-                      <a data-cmd="close" style="${closeStyle}">
-                        <span>close</span>
+    if (!firstElementAdded) {
+      firstElementAdded = true;
+      loadStyles();
+    }
+    
+    const $ruler = $(`<div data-c="ruler" class="rulers-box-ruler" data-axis="${axis}">
+                      <a data-cmd="remove" class="rulers-box-ruler-close">
+                        <span>x</span>
                       </a>
-                    </div>`).appendTo('body');
+                    </div>`).appendTo('.rulers-container');
   
     $ruler.draggable({
       axis: axis
     });
-  
-    $ruler.on('click', '[data-cmd=close]', function (e) {
-      $ruler.remove();
-      $currentTarget = null;
-      return false;
-    });
   };
   
-  const style = document.createElement('style');
   
-  style.innerHTML = `
-  .rulers-box {
-    background: rgba(0,0,0,.4);
-    position:fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999999999999;
-    font-size: 12px;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .rulers-box-ruler {
-    cursor:pointer; 
-    background: rgba(0,0,0,.4);
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:9999999999999;
-    outline: 1px solid red;
-  }
-  
-  .rulers-box-selected {
-    outline: 1px solid green;
-  }
-  `;
-  
-  document.head.appendChild(style);
   
   window.__rulers = {
     createRuler,
