@@ -1,9 +1,18 @@
 // webpack config to create a bundle for main.js into pkg folder dist/main.js
 const path = require('path');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+const DATADOG_URL = process.env.DATADOG_URL;
 
 module.exports = (env, argv) => {  
   return {
-    entry: './src/main.js',
+    entry: {
+      main: './src/main.js',
+      popup: './src/popup.js',
+    },
     output: {
       path: path.resolve(__dirname, 'pkg/dist'),
       filename: '[name].js',
@@ -23,6 +32,11 @@ module.exports = (env, argv) => {
           }
         }
       ]
-    }
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env.DATADOG_URL': JSON.stringify(DATADOG_URL),
+      }),
+    ]
   }
 };

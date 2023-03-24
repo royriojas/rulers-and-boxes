@@ -74,8 +74,6 @@ export const initRulers = () => {
         e.preventDefault();
       }
     }
-    
-    
   });
   
   $('body').on('click', '[data-cmd="remove"]', (e) => {

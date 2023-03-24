@@ -15,15 +15,28 @@
         background: #eee;
         cursor: pointer;
       }
+      
+      .block {
+        padding: .5rem 1rem;
+      }
 
     </style>
-    <script src="popup.js"></script>
+    <script src="dist/popup.js"></script>
   </head>
   <body>
     <div class="commands">
       <div data-cmd="create-ruler" data-axis="y">Create Horizontal Ruler</div>
       <div data-cmd="create-ruler" data-axis="x">Create Vertical Ruler</div>
       <div data-cmd="create-box">Create Box</div>
+      <div class="block">
+        <p>dc-cid</p>
+        <input data-c="cid" type="text" />
+        <p>time amount</p>
+        <input data-c="time-from" type="text" value="7" />
+        <p>time unit</p>
+        <input data-c="time-unit" type="text" value="d" />
+        <button data-c="open-dd">Go</button>
+      </div>
     </div>
   </body>
 </html>
