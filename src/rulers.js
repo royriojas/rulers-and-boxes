@@ -34,11 +34,13 @@ export const initRulers = () => {
     if (e.key === 'Escape') {
       $currentTarget?.removeClass('rulers-box-selected');
       $currentTarget = null;
+      e.preventDefault();
     }
 
     if (e.key === 'Delete') {
       $currentTarget?.remove();
       $currentTarget = null;
+      e.preventDefault();
     }
     const displacement = e.metaKey ? 10 : 1;
     
@@ -51,23 +53,29 @@ export const initRulers = () => {
     if (e.key === 'ArrowUp') {
       if (!axis || axis === 'y') {
         $currentTarget?.css({ top: `-=${displacement}px` });
+        e.preventDefault();
       }
     }
     if (e.key === 'ArrowDown') {
       if (!axis || axis === 'y') {
         $currentTarget?.css({ top: `+=${displacement}px` });
+        e.preventDefault();
       }
     }
     if (e.key === 'ArrowLeft') {
       if (!axis || axis === 'x') {
         $currentTarget?.css({ left: `-=${displacement}px` });
+        e.preventDefault();
       }
     }
     if (e.key === 'ArrowRight') {
       if (!axis || axis === 'x') {
         $currentTarget?.css({ left: `+=${displacement}px` });
+        e.preventDefault();
       }
     }
+    
+    
   });
   
   $('body').on('click', '[data-cmd="remove"]', (e) => {
