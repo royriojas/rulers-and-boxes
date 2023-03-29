@@ -16,6 +16,7 @@ export const loadStyles = () => {
     width: 100vw;
     height: 100vh;
     pointer-events: none;
+    z-index: 2147483647;
   }
   
   .rulers-container * { pointer-events: auto; }
