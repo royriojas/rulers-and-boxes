@@ -2,8 +2,11 @@
 <html>
   <head>
     <title>Rulers and boxes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">
     <style>
-      body { overflow: hidden; margin: 0px; background: white; }
+      body { overflow: hidden; margin: 0px; background: white; font-family: 'Overpass', consolas, monaco, monospace; }
 
       div[data-cmd] {
         width: 200px;
@@ -19,22 +22,34 @@
       .block {
         padding: .5rem 1rem;
       }
+      
+      .container {
+        padding: .5rem 1rem;
+        background: #efefef;
+        min-width: 400px;
+      }
 
     </style>
     <script src="dist/popup.js"></script>
   </head>
   <body>
-    <div class="commands">
+    <div class="container commands">
       <div data-cmd="create-ruler" data-axis="y">Create Horizontal Ruler</div>
       <div data-cmd="create-ruler" data-axis="x">Create Vertical Ruler</div>
       <div data-cmd="create-box">Create Box</div>
       <div class="block">
-        <p>dc-cid</p>
-        <input data-c="cid" type="text" />
-        <p>time amount</p>
-        <input data-c="time-from" type="text" value="7" />
-        <p>time unit</p>
-        <input data-c="time-unit" type="text" value="d" />
+        <div class="field">
+          <p>dc-cid</p>
+          <input data-c="cid" type="text" />
+        </div>
+        <div class="field">
+          <p>Time amount</p>
+          <input data-c="time-from" type="text" value="7" />  
+        </div>
+        <div class="field">
+          <p>Time unit</p>
+          <input data-c="time-unit" type="text" value="d" />
+        </div>
         <button data-c="open-dd">Go</button>
       </div>
     </div>
