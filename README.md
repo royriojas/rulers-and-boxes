@@ -5,7 +5,7 @@ This is a super simple chrome extension that will allow users to create rulers a
 ## Installation
 
 1. clone this repo to your computer
-2. create an `.env` with a `DATADOG_URL` entry like `DATADOG_URL=https://app.datadog.com`
+2. copy the `.env-example` to `.env` and make sure you have the `DATADOG_URL` entry pointing to your datadog instance
 2. run `yarn`
 3. run `yarn build`
 4. navigate to `chrome://extensions` and choose load unpacked and choose the `pkg` folder

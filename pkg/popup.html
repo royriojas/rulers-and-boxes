@@ -1,56 +1,108 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Rulers and boxes</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">
-    <style>
-      body { overflow: hidden; margin: 0px; background: white; font-family: 'Overpass', consolas, monaco, monospace; }
-
-      div[data-cmd] {
-        width: 200px;
-        height: 60px;
-        margin: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #eee;
-        cursor: pointer;
-      }
-      
-      .block {
-        padding: .5rem 1rem;
-      }
-      
-      .container {
-        padding: .5rem 1rem;
-        background: #efefef;
-        min-width: 400px;
-      }
-
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <script src="dist/popup.js"></script>
   </head>
-  <body>
-    <div class="container commands">
-      <div data-cmd="create-ruler" data-axis="y">Create Horizontal Ruler</div>
-      <div data-cmd="create-ruler" data-axis="x">Create Vertical Ruler</div>
-      <div data-cmd="create-box">Create Box</div>
-      <div class="block">
-        <div class="field">
-          <p>dc-cid</p>
-          <input data-c="cid" type="text" />
+  <body
+    class="bg-gray-300 min-w-[350px] m-0 border-0 grid grid-flow-row grid-cols-6 gap-3"
+  >
+    <div class="container commands col-span-6 bg-white px-5 py-4">
+      <h2 class="mb-3">Rulers</h2>
+      <div
+        data-group="ruler-cmds"
+        class="grid grid-flow-col gap-1 grid-cols-12"
+      >
+        <button
+          class="icon-button col-span-4"
+          data-cmd="create-ruler"
+          data-axis="y"
+        >
+          <div>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.5 4C0.223858 4 0 4.22386 0 4.5V10.5C0 10.7761 0.223858 11 0.5 11H14.5C14.7761 11 15 10.7761 15 10.5V4.5C15 4.22386 14.7761 4 14.5 4H0.5ZM1 10V5H2.075V7.5C2.075 7.73472 2.26528 7.925 2.5 7.925C2.73472 7.925 2.925 7.73472 2.925 7.5V5H4.075V6.5C4.075 6.73472 4.26528 6.925 4.5 6.925C4.73472 6.925 4.925 6.73472 4.925 6.5V5H6.075V6.5C6.075 6.73472 6.26528 6.925 6.5 6.925C6.73472 6.925 6.925 6.73472 6.925 6.5V5H8.075V7.5C8.075 7.73472 8.26528 7.925 8.5 7.925C8.73472 7.925 8.925 7.73472 8.925 7.5V5H10.075V6.5C10.075 6.73472 10.2653 6.925 10.5 6.925C10.7347 6.925 10.925 6.73472 10.925 6.5V5H12.075V6.5C12.075 6.73472 12.2653 6.925 12.5 6.925C12.7347 6.925 12.925 6.73472 12.925 6.5V5H14V10H1Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <span>Horizontal</span>
+        </button>
+        <button
+          class="icon-button col-span-4"
+          data-cmd="create-ruler"
+          data-axis="x"
+        >
+          <div>
+            <svg
+              style="transform: rotate(90deg)"
+              width="18"
+              height="18"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.5 4C0.223858 4 0 4.22386 0 4.5V10.5C0 10.7761 0.223858 11 0.5 11H14.5C14.7761 11 15 10.7761 15 10.5V4.5C15 4.22386 14.7761 4 14.5 4H0.5ZM1 10V5H2.075V7.5C2.075 7.73472 2.26528 7.925 2.5 7.925C2.73472 7.925 2.925 7.73472 2.925 7.5V5H4.075V6.5C4.075 6.73472 4.26528 6.925 4.5 6.925C4.73472 6.925 4.925 6.73472 4.925 6.5V5H6.075V6.5C6.075 6.73472 6.26528 6.925 6.5 6.925C6.73472 6.925 6.925 6.73472 6.925 6.5V5H8.075V7.5C8.075 7.73472 8.26528 7.925 8.5 7.925C8.73472 7.925 8.925 7.73472 8.925 7.5V5H10.075V6.5C10.075 6.73472 10.2653 6.925 10.5 6.925C10.7347 6.925 10.925 6.73472 10.925 6.5V5H12.075V6.5C12.075 6.73472 12.2653 6.925 12.5 6.925C12.7347 6.925 12.925 6.73472 12.925 6.5V5H14V10H1Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <span>Vertical</span>
+        </button>
+        <button class="icon-button col-span-4" data-cmd="create-box">
+          <div>
+            <svg
+              fill="currentColor"
+              width="15"
+              height="15"
+              viewBox="0 0 1920 1920"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1468.235 0v112.941H451.765V0H0v451.878h112.941v1016.47H0V1920h451.765v-112.941h1016.47V1920h451.878v-451.652h-112.941V451.878h112.94V0h-451.877Zm113.054 338.824h225.883V112.94h-225.883v225.883Zm-1468.348 0h225.883V112.94H112.94v225.883Zm112.941 113.054h225.883V225.882h1016.47v225.996h225.996v1016.47h-225.996v225.77H451.765v-225.77H225.882V451.878Zm1355.407 1355.18h225.883v-225.882h-225.883v225.883Zm-1468.348 0h225.883v-225.882H112.94v225.883Z"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <span>Box</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-span-6 bg-white px-5 py-4">
+      <h2 class="mb-3">Datadog search by<br />correlation Id</h2>
+      <div class="col-span-6">
+        <div class="grid grid-flow-rows grid-cols-12 gap-2">
+          <div class="field col-span-12">
+            <p>Correlation Id (dc-cid)</p>
+            <input class="textfield" data-c="cid" type="text" />
+          </div>
+          <div class="field col-span-6">
+            <p>Time amount</p>
+            <input class="textfield" data-c="time-from" type="text" value="7" />
+          </div>
+          <div class="field col-span-6">
+            <p>Time unit</p>
+            <input class="textfield" data-c="time-unit" type="text" value="d" />
+          </div>
+          <button class="btn col-span-12 mt-4" data-c="open-dd">Open Datadog</button>
         </div>
-        <div class="field">
-          <p>Time amount</p>
-          <input data-c="time-from" type="text" value="7" />  
-        </div>
-        <div class="field">
-          <p>Time unit</p>
-          <input data-c="time-unit" type="text" value="d" />
-        </div>
-        <button data-c="open-dd">Go</button>
       </div>
     </div>
   </body>

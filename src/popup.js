@@ -1,3 +1,5 @@
+import './styles.css';
+
 import { genURL } from './dayjs-helper';
 
 document.addEventListener('DOMContentLoaded', () => {

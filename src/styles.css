@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    font-family: 'Monaspace Krypton', 'Consolas', 'Monaco', 'monospace';
+    box-sizing: border-box;
+  }
+  h2 {
+    @apply text-sm uppercase;
+  }
+}
+
+
+@layer components {
+  .textfield {
+    @apply bg-white text-black border border-slate-800 rounded-md appearance-none p-2 text-xs w-full;  
+  }
+  
+  .icon-button {
+    @apply bg-gray-50 flex flex-col items-center justify-center rounded-md appearance-none p-2 text-slate-900 hover:bg-gray-100 text-xs gap-3 min-h-[80px] border border-gray-300;
+  }
+  
+  .btn {
+    @apply bg-black hover:bg-slate-800 text-white inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2;
+  }
+}
+

@@ -9,6 +9,7 @@ const DATADOG_URL = process.env.DATADOG_URL;
 
 module.exports = (env, argv) => {  
   return {
+    devtool: 'source-map',
     entry: {
       main: './src/main.js',
       popup: './src/popup.js',
@@ -20,6 +21,11 @@ module.exports = (env, argv) => {
     },
     module: {
       rules: [
+        {
+          test: /\.css$/i,
+          include: path.resolve(__dirname, './src'),
+          use: ['style-loader', 'css-loader', 'postcss-loader'],
+        },
         {
           test: /\.js$/,
           exclude: /node_modules/,

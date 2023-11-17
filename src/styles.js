@@ -17,9 +17,48 @@ export const loadStyles = () => {
     height: 100vh;
     pointer-events: none;
     z-index: 2147483647;
+    box-sizing: border-box;
   }
   
   .rulers-container * { pointer-events: auto; }
+  
+  .vertical-line-l,
+  .vertical-line-r,
+  .horizontal-line-t,
+  .horizontal-line-b {
+    position: absolute;
+    background: rgba(255, 0, 0, 0.4);
+    pointer-events: none;
+  }
+  
+  .vertical-line-l,
+  .vertical-line-r {
+    width: 1px;
+    height: 600vh;
+    top: -300vh;
+  }
+  
+  .vertical-line-l {
+    left: 0;
+  }
+  .vertical-line-r {
+    right: 0;
+  }
+  
+  .horizontal-line-t,
+  .horizontal-line-b {
+    height: 1px;
+    width: 600vw;
+    left: -300vw;
+  }
+  
+  .horizontal-line-t {
+    top: 0;
+  }
+  .horizontal-line-b {
+    bottom: 0;
+  }
+  
   
   .rulers-box {
     container-type: size;

@@ -4,7 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "dev": "webpack --mode=development --watch"
   },
   "keywords": [],
   "author": "royriojas",
@@ -13,9 +14,17 @@
     "@babel/core": "^7.21.3",
     "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
+    "autoprefixer": "^10.4.16",
     "babel-loader": "^9.1.2",
+    "css-loader": "^6.8.1",
+    "postcss": "^8.4.31",
+    "postcss-loader": "^7.3.3",
+    "postcss-preset-env": "^9.3.0",
+    "style-loader": "^3.3.3",
+    "tailwindcss": "^3.3.5",
     "webpack": "^5.76.2",
-    "webpack-cli": "^5.0.1"
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
     "dayjs": "^1.11.7",

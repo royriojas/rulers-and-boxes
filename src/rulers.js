@@ -95,6 +95,10 @@ export const initRulers = () => {
                       <a data-cmd="remove" class="rulers-box-ruler-close">
                         <span>x</span>
                       </a>
+                      <div class="vertical-line-l"></div>
+                      <div class="vertical-line-r"></div>
+                      <div class="horizontal-line-t"></div>
+                      <div class="horizontal-line-b"></div>
                     </div>`).appendTo('.rulers-container');
     $box.css({ width: w, height: h });
     $box.draggable({
