@@ -5,3 +5,5 @@ yarn-error.log
 yarn-debug.log
 .DS_Store
 .env
+# Local Netlify folder
+.netlify

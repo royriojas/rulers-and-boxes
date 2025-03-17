@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const $daysFrom = $('[data-c="time-from"]');
   const $daysTo = $('[data-c="time-unit"]');
   const $btn = $('[data-c="open-dd"]');
-  
+
   $btn.addEventListener('click', () => {
     const cid = $input.value;
     const fromNow = Number.parseInt($daysFrom.value) || 7;

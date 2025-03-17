@@ -11,7 +11,7 @@ module.exports = (env, argv) => {
   return {
     entry: {
       main: './src/main.js',
-      popup: './src/popup.js',
+      // popup: './src/popup.js',
     },
     output: {
       path: path.resolve(__dirname, 'pkg/dist'),
@@ -30,13 +30,27 @@ module.exports = (env, argv) => {
               plugins: ['@babel/plugin-transform-runtime']
             }
           }
-        }
+        },
+        {
+          test: /\.s[ac]ss$/i,
+          use: [
+            // Creates `style` nodes from JS strings
+            "style-loader",
+            // Translates CSS into CommonJS
+            "css-loader",
+            // Compiles Sass to CSS
+            "sass-loader",
+          ],
+        },
+        {
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"],
+        },
+        {
+          test: /\.(svg|png)$/,
+          type: "asset/resource",
+        },
       ]
     },
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env.DATADOG_URL': JSON.stringify(DATADOG_URL),
-      }),
-    ]
   }
 };

@@ -16,9 +16,10 @@ export const loadStyles = () => {
     width: 100vw;
     height: 100vh;
     pointer-events: none;
-    z-index: 2147483647;
+    border: none;
+    background: none;
   }
-  
+
   .rulers-container * { pointer-events: auto; }
   
   .rulers-box {
@@ -259,8 +260,10 @@ export const loadStyles = () => {
   
   const container = document.createElement('div');
   container.classList.add('rulers-container');
-  
+  container.setAttribute('popover', 'manual');
   document.body.appendChild(container);
+
+  container.showPopover();
 }
-  
+
  

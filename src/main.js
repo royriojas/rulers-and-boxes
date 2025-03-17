@@ -1,5 +1,6 @@
 import './jquery-ui.js';
-import { initRulers } from './rulers';
+import '../pkg/jquery-ui.css';
+import { initRulers } from './rulers.js';
 
 initRulers();
 
