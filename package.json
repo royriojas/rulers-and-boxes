@@ -4,7 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "dev": "webpack --mode=development"
   },
   "keywords": [],
   "author": "royriojas",

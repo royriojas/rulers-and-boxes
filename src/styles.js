@@ -81,11 +81,11 @@ export const loadStyles = () => {
       font-size: 80px;
     }
   }
-  
+
   .rulers-box [data-size] {
     position: absolute;
-    top: -20px;
-    left: 0;
+    bottom: -20px;
+    right: 0;
     font-family: 'Overpass Mono', monospace;
     font-size: 13px;
     color: #FF0000;
@@ -93,7 +93,21 @@ export const loadStyles = () => {
     line-height: 13px;
     white-space: nowrap;
   }
-  
+
+  .rulers-box [data-c="pos"] {
+    position: absolute;
+    top: 0;
+    left: 2px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 6px;
+    line-height: 13px;
+    white-space: nowrap;
+    background: rgba(87, 87, 87, 0.9);
+  }
+
+  .rulers-box [data-c="pos"]:focus,
   .rulers-box [data-size]:focus {
     box-shadow: 0 0 5px #FF00001A;
     color: #fff;
@@ -133,7 +147,6 @@ export const loadStyles = () => {
   
   .rulers-box-ruler {
     font-family: 'Overpass Mono', monospace;
-    cursor:pointer; 
     background: rgba(255, 0, 0, 0.1);
     background-blend-mode: multiply;
     box-shadow: inset 0px -0.5px 0px rgba(255, 0, 0, 0.2), inset 0px 0.5px 0px rgba(255, 0, 0, 0.2);
@@ -141,11 +154,70 @@ export const loadStyles = () => {
     top:0;
     left:0;
   }
-  
+
+  .rulers-box-ruler[data-axis] [data-c="pos"]:focus {
+    box-shadow: 0 0 5px #FF00001A;
+    color: #fff;
+    background: red;
+  }
+
+  .rulers-box-ruler[data-axis="x"] [data-c="pos"][data-pos="after"] {
+    position: absolute;
+    top: 2px;
+    left: 45px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 6px;
+    line-height: 13px;
+    white-space: nowrap;
+    background: rgba(87, 87, 87, 0.9);
+  }
+
+  .rulers-box-ruler[data-axis="x"] [data-c="pos"][data-pos="before"] {
+    position: absolute;
+    bottom: 2px;
+    right: 45px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 6px;
+    line-height: 13px;
+    white-space: nowrap;
+    background: rgba(87, 87, 87, 0.9);
+  }
+
+
+  .rulers-box-ruler[data-axis="y"] [data-c="pos"][data-pos="after"] {
+    position: absolute;
+    top: 45px;
+    left: 2px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 6px;
+    line-height: 13px;
+    white-space: nowrap;
+    background: rgba(87, 87, 87, 0.9);
+  }
+
+  .rulers-box-ruler[data-axis="y"] [data-c="pos"][data-pos="before"] {
+    position: absolute;
+    bottom: 45px;
+    right: 2px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 6px;
+    line-height: 13px;
+    white-space: nowrap;
+    background: rgba(87, 87, 87, 0.9);
+  }
+
   .rulers-box-ruler:hover {
     background: rgba(255, 0, 0, 0.15);
   }
-  
+
   .rulers-box-ruler:after {
     position: absolute;
     top: 0;
@@ -159,6 +231,7 @@ export const loadStyles = () => {
   .rulers-box-ruler[data-axis="x"] {
     height: 100vh;
     width: 40px;
+    cursor: ew-resize;
   }
   
   .rulers-box-ruler[data-axis="x"]:after {
@@ -177,10 +250,11 @@ export const loadStyles = () => {
   }
   
   .rulers-box-ruler[data-axis="y"] {
-    width:100vw; 
+    width:100vw;
     height: 40px;
+    cursor: ns-resize;
   }
-  
+
   .rulers-box-ruler[data-axis="y"]:after {
     border-top: 1px solid red;
     border-bottom: 1px solid red;
@@ -262,6 +336,11 @@ export const loadStyles = () => {
   container.classList.add('rulers-container');
   container.setAttribute('popover', 'manual');
   document.body.appendChild(container);
+
+  container.addEventListener('mousedown', (e) => {
+    container.hidePopover();
+    container.showPopover();
+  }, true);
 
   container.showPopover();
 }
