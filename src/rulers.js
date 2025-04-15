@@ -255,5 +255,9 @@ export const initRulers = () => {
       if ($box?.length === 0) return;
       $box.css({ width: w, height: h });
     },
+
+    clearAll: () => {
+      $('[data-c="box"], [data-c="ruler"]').remove();
+    },
   };
 };
