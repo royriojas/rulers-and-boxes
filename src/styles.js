@@ -32,7 +32,7 @@ export const loadStyles = () => {
     top: 0;
     left: 0;
     cursor: pointer;
-    border: 1px solid #FF00001A;
+    border: none;
   }
   
   .rulers-box.rulers-box-selected:after {
